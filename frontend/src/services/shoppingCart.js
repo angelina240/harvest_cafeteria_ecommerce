@@ -34,6 +34,6 @@ export const generateSale = () => {
 export const getSaleList = ({ setSalesList }) => {
     const listUrl = getApiUrl("sale/client")
     axios.get(listUrl, { withCredentials: true }).then(response => {
-        setSalesList(response.data)
+        setSalesList(response.data )
     })
 }
