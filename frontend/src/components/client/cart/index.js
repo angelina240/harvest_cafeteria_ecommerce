@@ -4,8 +4,9 @@ import cartStyle from './cart.module.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getShoppingList, getSaleList, deleteShoppingItem, generateSale } from '../../../services/shoppingCart'
 import LoadingButton from '@mui/lab/LoadingButton';
-function Cart() {
+import MyPurchases from './MyPurchases';
 
+function Cart() {
     const [productList, setProductList] = useState([])
     const [salesList, setSalesList] = useState([])
     const [open, setOpen] = useState(false)
@@ -34,9 +35,6 @@ function Cart() {
             total = total + (item.amount * item.product.price)
         })
         return total
-    }
-    const getDate = date => {
-        return new Date(date).toLocaleDateString()
     }
     const confirmSale = () => {
         setLoading(true)
@@ -124,23 +122,7 @@ function Cart() {
                 </Grid>
                 <Divider orientation="vertical" flexItem></Divider>
                 <Grid item xs={12} md={3} justifyContent='center'>
-                    <div className={cartStyle.prev_container}>
-                        <Typography variant="span" color={'#1976d2'} fontSize={30} component="h2" fontWeight={500}>
-                            Mis Compras
-                        </Typography>
-                        {
-                            salesList.map(sale =>
-                                <div className={cartStyle.prev_sales} key={sale.total}>
-                                    <Typography variant="span" fontSize={20} component="h2" fontWeight={500}>
-                                        Fecha: {getDate(sale.date)}
-                                    </Typography>
-                                    <Typography mt={2} variant="span" fontSize={25} component="h2" fontWeight={600}>
-                                        ${sale.total.toFixed(2)}
-                                    </Typography>
-                                </div>
-                            )
-                        }
-                    </div>
+                    <MyPurchases salesList={salesList}/>
                 </Grid>
             </Grid>
             <Snackbar open={open} autoHideDuration={2000} onClose={closeFeedback}

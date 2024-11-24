@@ -5,7 +5,7 @@ import Register from './components/auth/register'
 import Client from './components/client/client'
 import Home from './components/client/components/home'
 import Detail from './components/client/components/detail'
-import Cart from './components/client/components/cart'
+import Cart from './components/client/cart'
 
 function App() {
   return (
