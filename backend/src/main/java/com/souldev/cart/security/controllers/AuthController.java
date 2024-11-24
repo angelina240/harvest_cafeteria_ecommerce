@@ -73,8 +73,11 @@ public class AuthController {
     public ResponseEntity<Object> resgister(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-        User user = new User(newUser.getUserName(), newUser.getEmail(),
-                passwordEncoder.encode(newUser.getPassword()));
+        User user = new User(
+            newUser.getUserName(),
+            newUser.getEmail(),
+            passwordEncoder.encode(newUser.getPassword())
+        );
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getByRoleName(RoleList.ROLE_USER).get());
         if (newUser.getRoles().contains("admin"))
