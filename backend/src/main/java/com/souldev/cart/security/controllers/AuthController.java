@@ -58,19 +58,19 @@ public class AuthController {
         if(bidBindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise sus credenciales"), HttpStatus.BAD_REQUEST);
         try {
-                Authentication authentication = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(loginUser.getUserName(), loginUser.getPassword())
-                );
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                String jwt = jwtProvider.generateToken(authentication);
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginUser.getUserName(), loginUser.getPassword())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtProvider.generateToken(authentication);
             CookieUtil.create(httpServletResponse, cookieName, jwt, true, -1, "dev-store-demo.firebaseapp.com");
-                return new ResponseEntity<>(new Message("Sesión iniciada"), HttpStatus.OK);
+            return new ResponseEntity<>(new Message("Sesión iniciada"), HttpStatus.OK);
         } catch (Exception e) {
                 return new ResponseEntity<>(new Message("Revise sus credenciales"), HttpStatus.BAD_REQUEST);
         }
     }
     @PostMapping("/register")
-    public ResponseEntity<Object> resgister(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
+    public ResponseEntity<Object> register(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
         User user = new User(
