@@ -1,12 +1,12 @@
 import { Typography } from "@mui/material";
 import cartStyle from "./cart.module.css";
 import PurchaseItem from "./PurchaseItem";
-import { Modal } from "mui-react-modal";
+import PurchaseDetailModal from "./PurchaseDetailModal";
 import { useState } from "react";
 
 export default function MyPurchases({ salesList }) {
-	const [openPurchaseModal, setOpenPurchaseModal] = useState(false);
-    const toggleOpenPurchaseModal = () => setOpenPurchaseModal(!openPurchaseModal);
+	const [saleIdForDetails, setSaleIdForDetails] = useState("");
+	const [openPurchaseDetailModal, setOpenPurchaseDetailModal] = useState(false);
 	return (
 		<div className={cartStyle.prev_container}>
 			<Typography
@@ -18,16 +18,19 @@ export default function MyPurchases({ salesList }) {
 			>
 				Mis Compras
 			</Typography>
-			{salesList.map(sale => (
-				<PurchaseItem sale={sale} setOpenPurchaseModal={setOpenPurchaseModal} />
+			{salesList.map((sale, index) => (
+				<PurchaseItem
+					key={index}
+					sale={sale}
+					setSaleIdForDetails={setSaleIdForDetails}
+					onOpenPurchaseDetailModal={() => setOpenPurchaseDetailModal(true)}
+				/>
 			))}
-			<Modal
-                open={openPurchaseModal}
-                title="Detalle de la compra"
-                description={"Este es tu detalle de la compra."}
-                close={toggleOpenPurchaseModal}
-                actionPosition="right"
-            />
+			<PurchaseDetailModal
+				open={openPurchaseDetailModal}
+				onClose={() => setOpenPurchaseDetailModal(false)}
+				saleId={saleIdForDetails}
+			/>
 		</div>
 	);
 }

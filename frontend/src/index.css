@@ -23,3 +23,18 @@ code {
   font-size: 1rem!important;
   width:max-content;
 }
+
+table {
+  
+  /* Styling border separate for table two. */
+  border-collapse: separate;
+}
+table,
+td,
+th {
+  border: 1.5px solid blue;
+}
+
+th, td {
+  padding: 5px 10px;
+}

@@ -110,7 +110,7 @@ function Cart() {
                             {productList.length ?
                                 <>
                                     <Typography variant="span" mr={4} fontSize={24} component="h2" fontWeight={700}>
-                                        Total: ${calculateTotal(productList).toFixed(2)}
+                                        Total: S/.{calculateTotal(productList).toFixed(2)}
                                     </Typography>
                                     {
                                         confirmButton()

@@ -74,7 +74,7 @@ function Detail() {
             </div>
             <div className={detailStyle.info}>
               <Typography variant="span" fontSize={30} component="h2" fontWeight={600}>
-                ${product && product.price.toFixed(2)}
+                S/.{product && product.price.toFixed(2)}
               </Typography>
               <div className={detailStyle.action}>
                 <IconButton color="primary" aria-label="add to shopping cart" onClick={subtract}
