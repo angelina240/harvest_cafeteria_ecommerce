@@ -1,0 +1,46 @@
+body {
+    background-image: url('https://www.shutterstock.com/image-photo/empty-coffee-table-over-defocused-600nw-1810878547.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+
+.section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+
+.title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #a37838;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+
+.title img {
+    margin-right: 15px;
+    border-radius: 50%; 
+    width: 80px;      
+    height: 80px;
+}
+
+@media (max-width: 600px) {
+    .title img {
+        width: 40px; 
+        height: 40px;
+    }
+}

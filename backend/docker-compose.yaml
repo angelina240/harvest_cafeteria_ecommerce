@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  postgres:
+    container_name: harvest_cafeteria_db_postgresql
+    restart: unless-stopped
+    image: onjin/alpine-postgres:13.0
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: harvest_cafeteria_db
+      LANG: 'en_US.UTF-8'
+    ports:
+      - 5432:5432
+    volumes:
+      - postgre_sql_data:/var/lib/postgresql/data
+
+volumes:
+  postgre_sql_data:
