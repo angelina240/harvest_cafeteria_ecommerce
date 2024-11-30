@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import com.souldev.cart.entities.Message;
 import com.souldev.cart.security.dtos.LoginUser;
 import com.souldev.cart.security.dtos.NewUser;
+import com.souldev.cart.security.dtos.UserDetailsDto;
 import com.souldev.cart.security.entities.Role;
 import com.souldev.cart.security.entities.User;
 import com.souldev.cart.security.enums.RoleList;
@@ -79,9 +80,10 @@ public class AuthController {
                 passwordEncoder.encode(newUser.getPassword())
         );
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getByRoleName(RoleList.ROLE_USER).get());
-        if (newUser.getRoles().contains("admin"))
+        if (newUser.isAdmin())
             roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
+        else
+            roles.add(roleService.getByRoleName(RoleList.ROLE_USER).get());
         user.setRoles(roles);
         userService.save(user);
         return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
@@ -93,8 +95,17 @@ public class AuthController {
         String userName = userDetails.getUsername();
         Optional<User> user= this.userService.getByUserName(userName);
         if (!user.isPresent())
-            return new ResponseEntity<>(new Message("No encotrado"), HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(user.get(), HttpStatus.OK) ;
+            return new ResponseEntity<>(new Message("No encontrado"), HttpStatus.NOT_FOUND);
+        User userObj = user.get();
+        boolean isAdmin = false;
+        for (Role userRole : userObj.getRoles()) {
+            if (userRole.getRoleName() == RoleList.ROLE_ADMIN) {
+                isAdmin = true;
+                break;
+            }
+        }
+        UserDetailsDto userDetailsDto = new UserDetailsDto(userObj.getId(), isAdmin);
+        return new ResponseEntity<>(userDetailsDto, HttpStatus.OK) ;
     }
     @GetMapping("/logout")
     public ResponseEntity<Message> logOut(HttpServletResponse httpServletResponse){

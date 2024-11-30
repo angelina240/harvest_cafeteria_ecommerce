@@ -1,0 +1,12 @@
+.wrapper {
+	background-image: url("https://www.shutterstock.com/image-photo/empty-coffee-table-over-defocused-600nw-1810878547.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	margin: 0;
+	font-family: Arial, sans-serif;
+	min-height: 100vh;
+	padding: 20px;
+	box-sizing: border-box;
+}

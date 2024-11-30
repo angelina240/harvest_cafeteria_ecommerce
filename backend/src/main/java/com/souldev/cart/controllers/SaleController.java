@@ -1,6 +1,5 @@
 package com.souldev.cart.controllers;
 
-import com.souldev.cart.dtos.SaleFullDetailItem;
 import com.souldev.cart.dtos.SaleHistoryRecord;
 import com.souldev.cart.entities.Sale;
 import com.souldev.cart.services.SaleService;

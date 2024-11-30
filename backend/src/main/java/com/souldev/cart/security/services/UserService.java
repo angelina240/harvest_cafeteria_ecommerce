@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.souldev.cart.security.entities.User;
-import com.souldev.cart.security.respositories.UserRepository;
+import com.souldev.cart.security.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,8 +5,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { getShoppingList, getSaleList, deleteShoppingItem, generateSale } from '../../../services/shoppingCart'
 import LoadingButton from '@mui/lab/LoadingButton';
 import MyPurchases from './MyPurchases';
+import { getUserDetails } from '../../../services/auth';
+import { Navigate } from 'react-router-dom';
 
 function Cart() {
+    const [isAdmin, setIsAdmin] = useState(null);
     const [productList, setProductList] = useState([])
     const [salesList, setSalesList] = useState([])
     const [open, setOpen] = useState(false)
@@ -20,6 +23,7 @@ function Cart() {
     useEffect(() => {
         getList()
         getSales()
+        setIsAdmin(getUserDetails().isAdmin);
     }, [])
     const deleteItem = (itemId) => {
         deleteShoppingItem({ itemId }).then(() => {
@@ -63,6 +67,8 @@ function Cart() {
                 Confirmar
             </Button>
     }
+    if (isAdmin !== null && isAdmin)
+        return <Navigate to="/store"/>
     return (
         <div className={cartStyle.container}>
             <Grid container spacing={1} className={cartStyle.grid}>

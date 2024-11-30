@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import com.souldev.cart.security.entities.Role;
 import com.souldev.cart.security.enums.RoleList;
-import com.souldev.cart.security.respositories.RoleRepository;
+import com.souldev.cart.security.repositories.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

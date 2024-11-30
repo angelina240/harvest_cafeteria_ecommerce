@@ -1,4 +1,4 @@
-package com.souldev.cart.security.respositories;
+package com.souldev.cart.security.repositories;
 
 import java.util.Optional;
 
