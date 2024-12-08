@@ -15,7 +15,7 @@ function Header({ notifyLogout }) {
 		const userDetails = getUserDetails();
 		setIsAdmin(userDetails.isAdmin);
 	}, []);
-	// Obtiene el número de productos en el carrito desde localStorage
+
 	useEffect(() => {
 		const getUserCart = () => {
 			const item = localStorage.getItem("number");
@@ -52,7 +52,7 @@ function Header({ notifyLogout }) {
 				<img
 					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXe4D2gn5i4fnOOCTxOCxvnOsvdIZZCQV_6w&s"
 					alt="logo"
-					height={80}
+					height={60}
 				/>
 				<Typography
 					variant="span"
@@ -67,7 +67,6 @@ function Header({ notifyLogout }) {
 			</a>
 
 			<nav className={headerStyles.actions}>
-				{/* Only show the cart if the user is not an admin (roles length is 1 for regular users) */}
 				{!isAdmin ? (
 					<IconButton
 						aria-label="cart"
@@ -98,13 +97,12 @@ function Header({ notifyLogout }) {
 					</IconButton>
 				)}
 
-				{/* Botón de logout */}
 				<IconButton
 					aria-label="logout"
 					color="error"
 					size="large"
 					onClick={closeSession}
-					style={{ fontSize: "45px", color: "#e74c3c" }} // Rojo
+					style={{ fontSize: "45px", color: "#e74c3c" }} 
 				>
 					<LogoutIcon style={{ fontSize: "45px" }} />
 				</IconButton>

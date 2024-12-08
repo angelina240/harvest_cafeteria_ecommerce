@@ -1,0 +1,35 @@
+.footer_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #D19A6B;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px; 
+}
+
+.text {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 10px;
+}

@@ -29,8 +29,7 @@ export default function PurchaseDetailModal({ open, onClose, saleId }) {
 		const saleFullDetail = await getSaleFullDetail(saleId);
 		saleFullDetail.items = [
 			...saleFullDetail.items,	
-			...saleFullDetail.items,	
-			...saleFullDetail.items,	
+			
 		];
 		setDetails(saleFullDetail);
 		setPrevSaleId(saleId);

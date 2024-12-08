@@ -7,6 +7,9 @@ import Home from "./components/client/home";
 import Detail from "./components/client/components/detail";
 import Cart from "./components/client/cart";
 import PurchaseHistory from "./components/client/purchase-history";
+import Footer from "./components/client/components/footer";
+
+
 import { useEffect, useState } from "react";
 
 const LOGIN_STATE = {
@@ -17,80 +20,59 @@ const LOGIN_STATE = {
 
 function App() {
 	const [loginState, setLoginState] = useState(LOGIN_STATE.WAITING);
+
 	useEffect(() => {
 		if (localStorage.hasOwnProperty("userDetails"))
 			setLoginState(LOGIN_STATE.LOGGED);
 		else setLoginState(LOGIN_STATE.LOGOUT);
 	}, []);
-	if (loginState === LOGIN_STATE.WAITING)
-		return null;
+
+	if (loginState === LOGIN_STATE.WAITING) return null;
+
 	return (
-		<Routes>
-			{loginState === LOGIN_STATE.LOGGED ? (
-				<>
-					<Route
-						path="store"
-						element={
-							<Client
-								notifyLogout={() =>
-									setLoginState(LOGIN_STATE.LOGOUT)
-								}
-							/>
-						}
-					>
+		<>
+			<Routes>
+				{loginState === LOGIN_STATE.LOGGED ? (
+					<>
 						<Route
-							path=""
-							element={<Home />}
-						/>
+							path="store"
+							element={
+								<Client
+									notifyLogout={() =>
+										setLoginState(LOGIN_STATE.LOGOUT)
+									}
+								/>
+							}
+						>
+							<Route path="" element={<Home />} />
+							<Route path="detail/:id/:category" element={<Detail />} />
+							<Route path="cart" element={<Cart />} />
+							<Route path="*" element={<Navigate to="/store" />} />
+						</Route>
+						<Route path="purchase-history" element={<PurchaseHistory />} />
+						<Route path="*" element={<Navigate to="/store" />} />
+					</>
+				) : (
+					<>
 						<Route
-							path="detail/:id/:category"
-							element={<Detail />}
+							path="/"
+							element={
+								<Login
+									notifyLogin={() =>
+										setLoginState(LOGIN_STATE.LOGGED)
+									}
+								/>
+							}
 						/>
-						<Route
-							path="cart"
-							element={<Cart />}
-						/>
-						<Route
-							path="*"
-							element={<Navigate to="/store" />}
-						/>
-					</Route>
-					<Route
-						path="purchase-history"
-						element={<PurchaseHistory />}
-					/>
-					<Route
-						path="*"
-						element={<Navigate to="/store" />}
-					/>
-				</>
-			) : (
-				<>
-					<Route
-						path="/"
-						element={
-							<Login
-								notifyLogin={() =>
-									setLoginState(LOGIN_STATE.LOGGED)
-								}
-							/>
-						}
-					/>
-					<Route
-						path="register-user"
-						element={<Register isAdmin={false} />}
-					/>
-					<Route
-						path="register-admin"
-						element={<Register isAdmin={true} />}
-					/>
-					<Route
-						path="*"
-						element={<Navigate to="/" />}
-					/>
-				</>
-			)}
-		</Routes>
+						<Route path="register-user" element={<Register isAdmin={false} />} />
+						<Route path="register-admin" element={<Register isAdmin={true} />} />
+						<Route path="*" element={<Navigate to="/" />} />
+					</>
+				)}
+			</Routes>
+			{/* Footer colocado fuera de las rutas */}
+			<Footer />
+		</>
 	);
 }
 
